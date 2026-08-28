@@ -24,7 +24,7 @@
         <a class="nav-link" href="#">Produits</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Panier(0)</a>
+        <a  id="panier" class="nav-link" href="#">Panier(0)</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -71,7 +71,10 @@
           panier[item_id ]= 1;
         }
          console.log(panier);
-         localStorage.setItem('panier',JSON.stringify(panier))
+         localStorage.setItem('panier',JSON.stringify(panier));
+         document.getElementById("panier").innerHTML="panier("+Object.keys(panier).length+")";
+
+         console.log(Object.keys(panier).length);
       });
 
     </script>
