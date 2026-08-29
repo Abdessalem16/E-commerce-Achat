@@ -24,7 +24,11 @@
         <a class="nav-link" href="#">Produits</a>
       </li>
       <li class="nav-item">
-        <a  id="panier" class="nav-link" href="#">Panier(0)</a>
+        <button  id ="panier" type="button" class="btn btn-secondary" data-html="true" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus
+              sagittis lacus vel augue laoreet rutrum faucibus.">
+              Panier(0)
+              </button>
+
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -76,7 +80,10 @@
 
          console.log(Object.keys(panier).length);
       });
-
+        $(function () {
+             $('[data-toggle="popover"]').popover();
+             document.getElementById('panier').setAttribute('data-content','<h5>Voici votre liste</h5>')
+        })
     </script>
 
 {% endblock %}
