@@ -14,7 +14,7 @@
     <div class="row">
       <div class="col-md-12">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="#">Lahouel-shop</a>
+          <a class="navbar-brand" href="{% url 'home' %}">Lahouel-shop</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -22,7 +22,7 @@
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
               <li class="nav-item active">
-                <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{% url 'home' %}">Accueil <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Produits</a>
@@ -72,43 +72,79 @@
 {% block js %}
 
 <script type="text/javascript">
-  var panier = {};
-  if (localStorage.getItem("panier") == null) {
-    panier = {};
-  } else {
-    panier = JSON.parse(localStorage.getItem("panier"));
-  }
-  function AfficherList(panier) {
-    var panierString = "";
-    panierString += "<h5>Voici votre liste</h5>";
-    var index = 1;
-    for (var x in panier) {
-      var produit = document.getElementById("aa" + x);
-      if (produit != null) {
-        panierString += index + ". ";
-        panierString += produit.innerHTML;
-        panierString += " Qte : " + panier[x]; panierString += "<br>"; index += 1;
-      }
-    }
-    document.getElementById("panier").setAttribute("data-content", panierString);
-    $('[data-toggle="popover"]').popover();
-  }
-  $(document).on("click", ".ted", function () {
-    var item_id = this.id.toString();
-    if (panier[item_id] != undefined) {
-      panier[item_id] = panier[item_id] + 1;
 
+    var panier = {};
+
+    if (localStorage.getItem("panier") == null) {
+        panier = {};
     } else {
-      panier[item_id] = 1;
+        panier = JSON.parse(localStorage.getItem("panier"));
+    }
 
-    } localStorage.setItem("panier", JSON.stringify(panier));
-    document.getElementById("panier").innerHTML = "Panier(" + Object.keys(panier).length + ")";
+    function AfficherList(panier) {
+
+        var panierString = "";
+
+        panierString += "<h5>Voici votre liste</h5>";
+
+        var index = 1;
+
+        for (var x in panier) {
+
+            var produit = document.getElementById("aa" + x);
+
+            if (produit != null) {
+
+                panierString += index + ". ";
+                panierString += produit.innerHTML;
+                panierString += " Qte : " + panier[x];
+                panierString += "<br>";
+
+                index += 1;
+            }
+        }
+
+        panierString += "<br>";
+        panierString += "<a href='/checkout' class='btn btn-primary'>Checkout</a>";
+
+        document.getElementById("panier")
+            .setAttribute("data-content", panierString);
+
+        $('[data-toggle="popover"]').popover();
+    }
+
+
+    $(document).on("click", ".ted", function () {
+
+        var item_id = this.id.toString();
+
+        if (panier[item_id] != undefined) {
+
+            panier[item_id] = panier[item_id] + 1;
+
+        } else {
+
+            panier[item_id] = 1;
+        }
+
+        localStorage.setItem(
+            "panier",
+            JSON.stringify(panier)
+        );
+
+        document.getElementById("panier").innerHTML =
+            "Panier(" + Object.keys(panier).length + ")";
+
+        AfficherList(panier);
+    });
+
+
+    document.getElementById("panier").innerHTML =
+        "Panier(" + Object.keys(panier).length + ")";
+
     AfficherList(panier);
-  });
-  document.getElementById("panier").innerHTML = "Panier(" + Object.keys(panier).length + ")";
 
-
-  AfficherList(panier); </script>
+</script>
 
 {% endblock %}
 
