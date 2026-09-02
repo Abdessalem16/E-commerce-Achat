@@ -9,7 +9,9 @@ class AdminCategorie(admin.ModelAdmin):
 class AdminProduct(admin.ModelAdmin):
     list_display = ('title', 'price', 'category', 'date_added')
 
+class AdminCommande(admin.ModelAdmin):
+    list_display =('items','nom','email','address','ville','pays','date_commande')
 
 admin.site.register(Product, AdminProduct)
 admin.site.register(Category, AdminCategorie)
-admin.site.register(Commande)
+admin.site.register(Commande,AdminCommande)
