@@ -7,6 +7,6 @@ urlpatterns = [
     path('',index,name='home'),
     path('<int:myid>',detail,name='detail'),
     path('checkout/',checkout,name='checkout'),
-        path('confirmation', confimation, name="confirmation" ),
+    path('confirmation', confimation, name="confirmation" ),
 
 ]
