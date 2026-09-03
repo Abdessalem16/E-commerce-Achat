@@ -1,25 +1,149 @@
-{% extends 'shop/base.html'%}
-
+{% extends 'shop/base.html' %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-6">
-        <div>
-          <img src="{{product.image}}" width="500px" height="500px">  
+
+<div class="container py-5">
+
+    <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+
+        <div class="row no-gutters">
+
+            <!-- IMAGE DU PRODUIT -->
+            <div class="col-md-6 bg-light d-flex align-items-center justify-content-center p-4">
+
+                <img
+                    src="{{ product.image }}"
+                    alt="{{ product.title }}"
+                    class="img-fluid"
+                    style="
+                        width: 100%;
+                        height: 450px;
+                        object-fit: contain;
+                    "
+                >
+
+            </div>
+
+
+            <!-- INFORMATIONS PRODUIT -->
+            <div class="col-md-6">
+
+                <div class="p-5">
+
+                    <!-- Titre -->
+                    <span class="badge badge-success mb-3">
+                        Produit disponible
+                    </span>
+
+                    <h1 class="font-weight-bold text-dark mb-3">
+                        {{ product.title }}
+                    </h1>
+
+
+                    <!-- Prix -->
+                    <div class="mb-4">
+
+                        <span class="text-muted">
+                            Prix
+                        </span>
+
+                        <div class="text-success font-weight-bold"
+                             style="font-size: 35px;">
+
+                            {{ product.price }} DT
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Ligne -->
+                    <hr>
+
+
+                    <!-- Description -->
+                    <div class="my-4">
+
+                        <h5 class="font-weight-bold mb-3">
+                            Description
+                        </h5>
+
+                        <p class="text-muted"
+                           style="line-height: 1.8;">
+
+                            {{ product.description }}
+
+                        </p>
+
+                    </div>
+
+
+                    <!-- Informations -->
+                    <div class="bg-light rounded p-3 mb-4">
+
+                        <div class="d-flex justify-content-between mb-2">
+
+                            <span class="text-muted">
+                                Disponibilité
+                            </span>
+
+                            <span class="text-success font-weight-bold">
+                                ✓ En stock
+                            </span>
+
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+
+                            <span class="text-muted">
+                                Livraison
+                            </span>
+
+                            <span class="font-weight-bold">
+                                24h
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Boutons -->
+                    <div class="row">
+
+                        <div class="col-md-6 mb-2">
+
+                            <button
+                                type="button"
+                                class="btn btn-success btn-lg btn-block"
+                            >
+                                🛒 Acheter
+                            </button>
+
+                        </div>
+
+                        <div class="col-md-6 mb-2">
+
+                            <a
+                                href="{% url 'home' %}"
+                                class="btn btn-outline-dark btn-lg btn-block"
+                            >
+                                ← Retour
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
-    </div>
-    <div class="col-md-6">
-   <div class="text-warning display-3">
-    {{ product.title }}
-   </div>
-   <div  class="text-danger">
-    Prix: {{ product.price }} DT
-   </div>
-   <div >
-    {{product.description}}
-   </div>
-   <a href="#"><button class="btn btn-success">Acheter</button></a>
+
     </div>
 
 </div>
+
 {% endblock %}
+
